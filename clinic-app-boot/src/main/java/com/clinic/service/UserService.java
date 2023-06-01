@@ -14,4 +14,6 @@ public interface UserService {
     void updateUser(int id, UserRequestDTO user);
 
     List<UserDTO> getUsers(UserSearchInfo userSearchInfo);
+
+    UserDTO checkUserCredentials(String email, String password);
 }

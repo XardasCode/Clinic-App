@@ -76,4 +76,21 @@ public class UserServiceImpl implements UserService {
                 .map(userMapper)
                 .toList();
     }
+
+    @Override
+    @Transactional
+    public UserDTO checkUserCredentials(String email, String password) {
+        log.debug("Check user {} credentials", email);
+        if (email == null || password == null || email.isBlank() || password.isBlank()) {
+            throw new ServerException("Email or password is null", ErrorList.BAD_REQUEST);
+        }
+        User user = userRepository.findByEmail(email);
+        if (user == null) {
+            throw new ServerException("User with email " + email + " not found", ErrorList.USER_NOT_FOUND);
+        }
+        if (!user.getPassword().equals(password)) {
+            throw new ServerException("Wrong password", ErrorList.WRONG_PASSWORD);
+        }
+        return userMapper.apply(user);
+    }
 }
