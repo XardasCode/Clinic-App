@@ -16,4 +16,6 @@ public interface UserService {
     List<UserDTO> getUsers(UserSearchInfo userSearchInfo);
 
     UserDTO checkUserCredentials(String email, String password);
+
+    Integer getUserPageCount(UserSearchInfo userSearchInfo);
 }

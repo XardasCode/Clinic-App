@@ -14,4 +14,6 @@ public interface VisitService {
     int saveVisit(VisitRequestDTO visit);
 
     void updateVisit(int id, VisitRequestDTO visit);
+
+    Integer getVisitPageCount(VisitSearchInfo visitSearchInfo);
 }

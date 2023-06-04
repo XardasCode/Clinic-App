@@ -9,7 +9,6 @@ import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -40,6 +39,18 @@ public class UserController {
                 .filter(filter)
                 .build();
         return ResponseEntity.ok(userService.getUsers(userSearchInfo));
+    }
+
+    @GetMapping(value = "/page-count")
+    public ResponseEntity<Integer> getUserPageCount(
+            @RequestParam(required = false, defaultValue = "10") String size,
+            @RequestParam(required = false) List<String> filter) {
+        log.info("get user page count point called");
+        UserSearchInfo userSearchInfo = UserSearchInfo.builder()
+                .size(Integer.parseInt(size))
+                .filter(filter)
+                .build();
+        return ResponseEntity.ok(userService.getUserPageCount(userSearchInfo));
     }
 
     @GetMapping(value = "/login")

@@ -44,7 +44,7 @@ public class UserSpecification implements Specification<User> {
                     predicates.add(criteriaBuilder.equal(root.get(filterField).get(NAME), filterValue.toUpperCase()));
                 }
                 if (filterField.equalsIgnoreCase(SPECIALIZATION)) {
-                    predicates.add(criteriaBuilder.equal(root.get(filterField).get(NAME), filterValue));
+                    predicates.add(criteriaBuilder.like(criteriaBuilder.lower(root.get(filterField).get(NAME)), "%" + filterValue.toLowerCase() + "%"));
                 }
             }
         }

@@ -86,7 +86,28 @@ VALUES ('Barak Obama', 'barak@gmail.com', '123', 1, NULL),
        ('Gregory House', 'house@gmail.com', '123', 2, 1),
        ('James Wilson', 'wilson@gmail.com', '123', 2, 2),
        ('Eric Foreman', 'foreman@gmail.com', '123', 2, 3),
-       ('Robert Chase', 'chase@gmail.com', '123', 2, 4);
+       ('Robert Chase', 'chase@gmail.com', '123', 2, 4),
+       ('Allison Cameron', 'alison@gmail.com', '123', 2, 5),
+       ('Lisa Cuddy', 'cuddy@gmail.com', '123', 2, 6),
+       ('Chris Taub', 'taub@gmail.com', '123', 2, 7),
+       ('Lawrence Kutner', 'kutner@gmail.com', '123', 2, 8),
+       ('Remy Hadley', 'hadley@gmail.com', '123', 2, 9),
+       ('Amber Volakis', 'volkatis@gmail.com', '123', 2, 10),
+       ('Martha Masters', 'masters@gmail.com', '123', 2, 11),
+       ('Jessica Adams', 'adams@gmail.com', '123', 2, 12),
+       ('Chi Park', 'park@gmail.com', '123', 2, 1),
+       ('Henry Dobson', 'dobson@gmail.com', '123', 2, 2),
+       ('Wendy Lee', 'lee@gmail.com', '123', 2, 3),
+       ('Peter Treiber', 'treiber@gmail.com', '123', 2, 4),
+       ('Karl Neumann', 'naumann@gmail.com', '123', 2, 5),
+       ('Hans Mueller', 'maeller@gmail.com', '123', 2, 6),
+       ('Klaus Schmidt', 'schmidt@gmail.com', '123', 2, 7),
+       ('Johann Fischer', 'fischer@gmail.com', '123', 2, 8),
+       ('Michael Weber', 'weber@gmail.com', '123', 2, 9),
+       ('Thomas Wagner', 'wagner@gmail.com', '123', 2, 10),
+       ('Uwe Becker', 'becker@gmail.com', '123', 2, 11),
+       ('Klaus Hoffmann', 'hoffmann@gmail.com', '123', 2, 12);
+
 
 
 INSERT INTO statuses (name)

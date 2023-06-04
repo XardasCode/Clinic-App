@@ -61,4 +61,16 @@ public class VisitController {
         return ResponseEntity.ok(JSONStatus.builder().message(String.valueOf(id)).build());
     }
 
+    @GetMapping(value = "/page-count")
+    public ResponseEntity<Integer> getVisitPageCount(
+            @RequestParam(required = false, defaultValue = "10") String size,
+            @RequestParam(required = false) List<String> filter) {
+        log.info("get visit page count point called");
+        VisitSearchInfo visitSearchInfo = VisitSearchInfo.builder()
+                .size(Integer.parseInt(size))
+                .filter(filter)
+                .build();
+        return ResponseEntity.ok(visitService.getVisitPageCount(visitSearchInfo));
+    }
+
 }

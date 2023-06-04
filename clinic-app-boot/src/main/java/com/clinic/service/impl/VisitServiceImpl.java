@@ -92,4 +92,12 @@ public class VisitServiceImpl implements VisitService {
         log.debug("Updated visit: {}", initialVisit);
         visitRepository.save(initialVisit);
     }
+
+    @Override
+    public Integer getVisitPageCount(VisitSearchInfo visitSearchInfo) {
+        log.debug("Get visit page count: {}", visitSearchInfo);
+        Specification<Visit> specification = new VisitSpecification(visitSearchInfo);
+        int size = visitRepository.findAll(specification).size();
+        return size % visitSearchInfo.getSize() == 0 ? size / visitSearchInfo.getSize() : size / visitSearchInfo.getSize() + 1;
+    }
 }

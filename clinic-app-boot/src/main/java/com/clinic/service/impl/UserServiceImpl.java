@@ -93,4 +93,13 @@ public class UserServiceImpl implements UserService {
         }
         return userMapper.apply(user);
     }
+
+    @Override
+    @Transactional
+    public Integer getUserPageCount(UserSearchInfo userSearchInfo) {
+        log.debug("Get user page count: {}", userSearchInfo);
+        Specification<User> specification = new UserSpecification(userSearchInfo);
+        int size = userRepository.findAll(specification).size();
+        return size % userSearchInfo.getSize() == 0 ? size / userSearchInfo.getSize() : size / userSearchInfo.getSize() + 1;
+    }
 }
