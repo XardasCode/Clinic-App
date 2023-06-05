@@ -50,7 +50,7 @@ public class User implements Serializable {
 
     public static User buildUserFromDTO(UserRequestDTO userDTO) {
         return User.builder()
-                .name(userDTO.getUsername())
+                .name(userDTO.getName())
                 .email(userDTO.getEmail())
                 .password(userDTO.getPassword())
                 .build();

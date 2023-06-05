@@ -21,7 +21,12 @@ public class VisitSpecification implements Specification<Visit> {
 
     public static final String SPLITERATOR = ":";
 
+    public static final String ID = "id";
     public static final String PATIENT = "patient";
+
+    public static final String PATIENT_ID = "patientId";
+
+    public static final String DOCTOR_ID = "doctorId";
 
     public static final String DOCTOR = "doctor";
 
@@ -51,17 +56,19 @@ public class VisitSpecification implements Specification<Visit> {
                 String filterField = filterParts[0];
                 String filterValue = filterParts[1];
 
-                if (filterField.equalsIgnoreCase(PATIENT)) {
+                if (filterField.equalsIgnoreCase(PATIENT) || filterField.equalsIgnoreCase(DOCTOR)) {
                     predicates.add(criteriaBuilder.like(criteriaBuilder.lower(root.get(filterField).get(NAME)), PERCENT + filterValue.toLowerCase() + PERCENT));
                 }
-                if (filterField.equalsIgnoreCase(DOCTOR)) {
-                    predicates.add(criteriaBuilder.like(criteriaBuilder.lower(root.get(filterField).get(NAME)), PERCENT + filterValue.toLowerCase() + PERCENT));
+                if (filterField.equalsIgnoreCase(PATIENT_ID)) {
+                    predicates.add(criteriaBuilder.equal(root.get(PATIENT).get(ID), Integer.parseInt(filterValue)));
+                }
+                if (filterField.equalsIgnoreCase(DOCTOR_ID)) {
+                    predicates.add(criteriaBuilder.equal(root.get(DOCTOR).get(ID), Integer.parseInt(filterValue)));
                 }
                 if (filterField.equalsIgnoreCase(DATE_FROM)) {
                     predicates.add(criteriaBuilder.greaterThanOrEqualTo(root.get(DATE), Date.valueOf(filterValue)));
                 }
                 if (filterField.equalsIgnoreCase(DATE_TO)) {
-                    // date is Date type, filterValue is String type, so we need to convert String to Date
                     predicates.add(criteriaBuilder.lessThanOrEqualTo(root.get(DATE), Date.valueOf(filterValue)));
                 }
                 if (filterField.equalsIgnoreCase(STATUS)) {

@@ -20,7 +20,8 @@ public enum ErrorList {
     VALIDATION_ERROR(10, HttpStatus.BAD_REQUEST),
     ROLE_NOT_FOUND(11, HttpStatus.NOT_FOUND),
     STATUS_NOT_FOUND(12, HttpStatus.NOT_FOUND),
-    WRONG_PASSWORD(13, HttpStatus.BAD_REQUEST), BAD_REQUEST(14, HttpStatus.BAD_REQUEST);
+    WRONG_PASSWORD(13, HttpStatus.BAD_REQUEST), BAD_REQUEST(14, HttpStatus.BAD_REQUEST),
+    USER_ALREADY_EXIST(14, HttpStatus.CONFLICT);
 
     private final int errorCode;
     private final HttpStatus httpStatusCode;

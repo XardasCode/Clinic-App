@@ -25,7 +25,7 @@ CREATE TABLE IF NOT EXISTS users
 (
     id                INT AUTO_INCREMENT NOT NULL,
     name              VARCHAR(255)       NOT NULL,
-    email             VARCHAR(255)       NOT NULL,
+    email             VARCHAR(255)       NOT NULL unique,
     password          VARCHAR(255)       NOT NULL,
     role_id           INT                NOT NULL,
     specialization_id INT,

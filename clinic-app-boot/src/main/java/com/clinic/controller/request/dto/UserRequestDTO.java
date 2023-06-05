@@ -13,7 +13,7 @@ import lombok.NoArgsConstructor;
 @Builder
 public class UserRequestDTO {
     @NotBlank(message = "Name is mandatory field")
-    private String username;
+    private String name;
 
     @NotBlank(message = "Email is mandatory field")
     private String email;

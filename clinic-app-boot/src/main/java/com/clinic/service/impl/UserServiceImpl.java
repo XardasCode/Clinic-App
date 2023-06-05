@@ -47,6 +47,10 @@ public class UserServiceImpl implements UserService {
     @Transactional
     public int saveUser(UserRequestDTO userDTO) {
         log.debug("Save user: {}", userDTO);
+        User checkUser = userRepository.findByEmail(userDTO.getEmail());
+        if (checkUser != null) {
+            throw new ServerException("User with email " + userDTO.getEmail() + " already exist", ErrorList.USER_ALREADY_EXIST);
+        }
         User user = User.buildUserFromDTO(userDTO);
         Role userRole = roleRepository.findById(UserRoleList.USER.getId())
                 .orElseThrow(() -> new ServerException("Role with id " + UserRoleList.USER.getId() + " not found", ErrorList.ROLE_NOT_FOUND));

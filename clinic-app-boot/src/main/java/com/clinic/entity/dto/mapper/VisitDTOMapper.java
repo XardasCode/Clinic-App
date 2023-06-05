@@ -14,6 +14,7 @@ public class VisitDTOMapper implements Function<Visit, VisitDTO> {
                 .id(visit.getId())
                 .patientName(visit.getPatient().getName())
                 .doctorName(visit.getDoctor().getName())
+                .doctorSpecialization(visit.getDoctor().getSpecialization().getName())
                 .problem(visit.getProblem())
                 .treatment(visit.getTreatment())
                 .status(visit.getStatus().getName())

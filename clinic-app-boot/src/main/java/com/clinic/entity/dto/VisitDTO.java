@@ -18,6 +18,8 @@ public class VisitDTO {
 
     private String doctorName;
 
+    private String doctorSpecialization;
+
     private String patientName;
 
     private String status;
