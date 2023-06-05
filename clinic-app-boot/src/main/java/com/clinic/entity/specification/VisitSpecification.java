@@ -26,13 +26,21 @@ public class VisitSpecification implements Specification<Visit> {
 
     public static final String PATIENT_ID = "patientId";
 
+    public static final String DOCTOR_NAME = "doctorName";
+
+    public static final String DOCTOR_SPECIALIZATION = "doctorSpecialization";
+
+    public static final String PATIENT_NAME = "patientName";
+
+    public static final String SPECIALIZATION = "specialization";
+
     public static final String DOCTOR_ID = "doctorId";
 
     public static final String DOCTOR = "doctor";
 
-    public static final String DATE_FROM = "date_from";
+    public static final String DATE_FROM = "dateFrom";
 
-    public static final String DATE_TO = "date_to";
+    public static final String DATE_TO = "dateTo";
 
     public static final String STATUS = "status";
 
@@ -65,6 +73,9 @@ public class VisitSpecification implements Specification<Visit> {
                 if (filterField.equalsIgnoreCase(DOCTOR_ID)) {
                     predicates.add(criteriaBuilder.equal(root.get(DOCTOR).get(ID), Integer.parseInt(filterValue)));
                 }
+                if (filterField.equalsIgnoreCase(SPECIALIZATION)) {
+                    predicates.add(criteriaBuilder.like(criteriaBuilder.lower(root.get(DOCTOR).get(SPECIALIZATION).get(NAME)), PERCENT + filterValue.toLowerCase() + PERCENT));
+                }
                 if (filterField.equalsIgnoreCase(DATE_FROM)) {
                     predicates.add(criteriaBuilder.greaterThanOrEqualTo(root.get(DATE), Date.valueOf(filterValue)));
                 }
@@ -85,8 +96,42 @@ public class VisitSpecification implements Specification<Visit> {
     }
 
     private void setSortOrder(CriteriaQuery<?> query, CriteriaBuilder criteriaBuilder, Root<Visit> root) {
-        query.orderBy(info.getDirection().equalsIgnoreCase(DESC) ?
-                criteriaBuilder.desc(root.get(info.getSortField())) :
-                criteriaBuilder.asc(root.get(info.getSortField())));
+        if (info.getSortField().equalsIgnoreCase(DOCTOR_NAME)) {
+            if (info.getDirection().equalsIgnoreCase(DESC)) {
+                query.orderBy(criteriaBuilder.desc(root.get(DOCTOR).get(NAME)));
+            } else {
+                query.orderBy(criteriaBuilder.asc(root.get(DOCTOR).get(NAME)));
+            }
+        } else if (info.getSortField().equalsIgnoreCase(DOCTOR_SPECIALIZATION)) {
+            if (info.getDirection().equalsIgnoreCase(DESC)) {
+                query.orderBy(criteriaBuilder.desc(root.get(DOCTOR).get(SPECIALIZATION).get(NAME)));
+            } else {
+                query.orderBy(criteriaBuilder.asc(root.get(DOCTOR).get(SPECIALIZATION).get(NAME)));
+            }
+        } else if (info.getSortField().equalsIgnoreCase(PATIENT_NAME)) {
+            if (info.getDirection().equalsIgnoreCase(DESC)) {
+                query.orderBy(criteriaBuilder.desc(root.get(PATIENT).get(NAME)));
+            } else {
+                query.orderBy(criteriaBuilder.asc(root.get(PATIENT).get(NAME)));
+            }
+        } else if (info.getSortField().equalsIgnoreCase(DATE)) {
+            if (info.getDirection().equalsIgnoreCase(DESC)) {
+                query.orderBy(criteriaBuilder.desc(root.get(DATE)));
+            } else {
+                query.orderBy(criteriaBuilder.asc(root.get(DATE)));
+            }
+        } else if (info.getSortField().equalsIgnoreCase(STATUS)) {
+            if (info.getDirection().equalsIgnoreCase(DESC)) {
+                query.orderBy(criteriaBuilder.desc(root.get(STATUS).get(NAME)));
+            } else {
+                query.orderBy(criteriaBuilder.asc(root.get(STATUS).get(NAME)));
+            }
+        } else {
+            if (info.getDirection().equalsIgnoreCase(DESC)) {
+                query.orderBy(criteriaBuilder.desc(root.get(DATE)));
+            } else {
+                query.orderBy(criteriaBuilder.asc(root.get(DATE)));
+            }
+        }
     }
 }

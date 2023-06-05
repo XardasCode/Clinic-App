@@ -30,6 +30,9 @@ public class Visit implements Serializable {
     @Column(name = "treatment")
     private String treatment;
 
+    @Column(name = "diagnosis")
+    private String diagnosis;
+
     @ManyToOne
     @JoinColumn(name = "doctor_id", nullable = false)
     @ToString.Exclude
@@ -53,6 +56,7 @@ public class Visit implements Serializable {
                 .date(Date.valueOf(visitDTO.getDate()))
                 .problem(visitDTO.getProblem())
                 .treatment(visitDTO.getTreatment() == null ? "" : visitDTO.getTreatment())
+                .diagnosis(visitDTO.getDiagnosis() == null ? "" : visitDTO.getDiagnosis())
                 .build();
     }
 
@@ -60,6 +64,7 @@ public class Visit implements Serializable {
         initialVisit.setDate(updatedVisit.getDate());
         initialVisit.setProblem(updatedVisit.getProblem());
         initialVisit.setTreatment(updatedVisit.getTreatment() == null ? initialVisit.getTreatment() : updatedVisit.getTreatment());
+        initialVisit.setDiagnosis(updatedVisit.getDiagnosis() == null ? initialVisit.getDiagnosis() : updatedVisit.getDiagnosis());
         initialVisit.setPatient(patient);
         initialVisit.setDoctor(doctor);
         initialVisit.setStatus(status);

@@ -20,6 +20,8 @@ public class VisitRequestDTO {
 
     private String treatment;
 
+    private String diagnosis;
+
     @Min(value = 1, message = "Doctor id must be greater than 0")
     private int doctorId;
 

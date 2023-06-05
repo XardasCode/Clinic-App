@@ -51,6 +51,7 @@ CREATE TABLE IF NOT EXISTS visits
     date      DATETIME           NOT NULL,
     status_id INT                NOT NULL,
     problem   TEXT               NOT NULL,
+    diagnosis TEXT,
     treatment TEXT,
     PRIMARY KEY (id),
     KEY user_id (user_id),

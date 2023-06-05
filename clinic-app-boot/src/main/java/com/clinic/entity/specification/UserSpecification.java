@@ -54,8 +54,25 @@ public class UserSpecification implements Specification<User> {
     }
 
     private void setSortOrder(CriteriaQuery<?> query, CriteriaBuilder criteriaBuilder, Root<User> root) {
-        query.orderBy(userSearchInfo.getDirection().equalsIgnoreCase(DESC) ?
-                criteriaBuilder.desc(root.get(userSearchInfo.getSortField())) :
-                criteriaBuilder.asc(root.get(userSearchInfo.getSortField())));
+        if (userSearchInfo.getSortField().equalsIgnoreCase(ROLE)) {
+            if (userSearchInfo.getDirection().equalsIgnoreCase(DESC)) {
+                query.orderBy(criteriaBuilder.desc(root.get(ROLE).get(NAME)));
+            } else {
+                query.orderBy(criteriaBuilder.asc(root.get(ROLE).get(NAME)));
+            }
+        }
+        if (userSearchInfo.getSortField().equalsIgnoreCase(SPECIALIZATION)) {
+            if (userSearchInfo.getDirection().equalsIgnoreCase(DESC)) {
+                query.orderBy(criteriaBuilder.desc(root.get(SPECIALIZATION).get(NAME)));
+            } else {
+                query.orderBy(criteriaBuilder.asc(root.get(SPECIALIZATION).get(NAME)));
+            }
+        } else {
+            if (userSearchInfo.getDirection().equalsIgnoreCase(DESC)) {
+                query.orderBy(criteriaBuilder.desc(root.get(NAME)));
+            } else {
+                query.orderBy(criteriaBuilder.asc(root.get(NAME)));
+            }
+        }
     }
 }

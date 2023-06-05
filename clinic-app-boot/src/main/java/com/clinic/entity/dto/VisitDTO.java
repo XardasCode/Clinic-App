@@ -16,9 +16,12 @@ public class VisitDTO {
 
     private String treatment;
 
+    private String diagnosis;
+
     private String doctorName;
 
     private String doctorSpecialization;
+
 
     private String patientName;
 
