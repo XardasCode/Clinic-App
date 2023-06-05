@@ -28,4 +28,8 @@ public class VisitDTO {
     private String status;
 
     private String date;
+
+    private String userId;
+
+    private String doctorId;
 }

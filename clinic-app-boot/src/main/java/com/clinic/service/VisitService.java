@@ -16,4 +16,8 @@ public interface VisitService {
     void updateVisit(int id, VisitRequestDTO visit);
 
     Integer getVisitPageCount(VisitSearchInfo visitSearchInfo);
+
+    void cancelVisit(int id);
+
+    void inProgressVisit(int id);
 }

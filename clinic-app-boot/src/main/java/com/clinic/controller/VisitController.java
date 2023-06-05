@@ -73,4 +73,19 @@ public class VisitController {
         return ResponseEntity.ok(visitService.getVisitPageCount(visitSearchInfo));
     }
 
+    @PatchMapping(value = "/{id}/cancel")
+    public ResponseEntity<JSONStatus> cancelVisit(@PathVariable int id) {
+        log.info("Canceling visit with id {}", id);
+        visitService.cancelVisit(id);
+        log.info("Visit canceled with id {}", id);
+        return ResponseEntity.ok(JSONStatus.builder().message(String.valueOf(id)).build());
+    }
+
+    @PatchMapping(value = "/{id}/in-progress")
+    public ResponseEntity<JSONStatus> inProgressVisit(@PathVariable int id) {
+        log.info("In progress visit with id {}", id);
+        visitService.inProgressVisit(id);
+        log.info("Visit in progress with id {}", id);
+        return ResponseEntity.ok(JSONStatus.builder().message(String.valueOf(id)).build());
+    }
 }

@@ -20,6 +20,8 @@ public class VisitDTOMapper implements Function<Visit, VisitDTO> {
                 .treatment(visit.getTreatment())
                 .status(visit.getStatus().getName())
                 .date(visit.getDate().toString())
+                .userId(String.valueOf(visit.getPatient().getId()))
+                .doctorId(String.valueOf(visit.getDoctor().getId()))
                 .build();
     }
 }

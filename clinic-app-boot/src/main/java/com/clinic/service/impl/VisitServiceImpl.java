@@ -14,6 +14,7 @@ import com.clinic.repository.UserRepository;
 import com.clinic.repository.VisitRepository;
 import com.clinic.repository.VisitStatusRepository;
 import com.clinic.service.VisitService;
+import com.clinic.util.VisitStatusList;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -99,5 +100,28 @@ public class VisitServiceImpl implements VisitService {
         Specification<Visit> specification = new VisitSpecification(visitSearchInfo);
         int size = visitRepository.findAll(specification).size();
         return size % visitSearchInfo.getSize() == 0 ? size / visitSearchInfo.getSize() : size / visitSearchInfo.getSize() + 1;
+    }
+
+    @Override
+    public void cancelVisit(int id) {
+        log.debug("Cancel visit with id: {}", id);
+        Visit visit = visitRepository.findById(id).orElseThrow(
+                () -> new ServerException("Visit with id " + id + " not found", ErrorList.VISIT_NOT_FOUND));
+        visit.setStatus(visitStatusRepository.findById(VisitStatusList.CANCELED.getId())
+                .orElseThrow(
+                        () -> new ServerException("Status with id 3 not found", ErrorList.STATUS_NOT_FOUND)));
+        visitRepository.save(visit);
+    }
+
+    @Override
+    public void inProgressVisit(int id) {
+        log.debug("Cancel visit with id: {}", id);
+        Visit visit = visitRepository.findById(id).orElseThrow(
+                () -> new ServerException("Visit with id " + id + " not found", ErrorList.VISIT_NOT_FOUND));
+        visit.setStatus(visitStatusRepository.findById(VisitStatusList.IN_PROGRESS.getId())
+                .orElseThrow(
+                        () -> new ServerException("Status with id 3 not found", ErrorList.STATUS_NOT_FOUND)));
+        visitRepository.save(visit);
+
     }
 }
