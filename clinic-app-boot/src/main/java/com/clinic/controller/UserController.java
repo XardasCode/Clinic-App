@@ -5,13 +5,16 @@ import com.clinic.controller.search.UserSearchInfo;
 import com.clinic.controller.status.JSONStatus;
 import com.clinic.entity.dto.UserDTO;
 import com.clinic.service.UserService;
+import com.clinic.service.impl.UserServiceImpl;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -22,6 +25,7 @@ import java.util.List;
 public class UserController {
 
     private final UserService userService;
+
 
     @GetMapping
     public ResponseEntity<List<UserDTO>> getUsers(
@@ -38,6 +42,7 @@ public class UserController {
                 .direction(direction)
                 .filter(filter)
                 .build();
+
         return ResponseEntity.ok(userService.getUsers(userSearchInfo));
     }
 
@@ -46,6 +51,7 @@ public class UserController {
             @RequestParam(required = false, defaultValue = "10") String size,
             @RequestParam(required = false) List<String> filter) {
         log.info("get user page count point called");
+        log.debug("Debug");
         UserSearchInfo userSearchInfo = UserSearchInfo.builder()
                 .size(Integer.parseInt(size))
                 .filter(filter)

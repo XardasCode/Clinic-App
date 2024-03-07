@@ -8,7 +8,7 @@ DROP TABLE IF EXISTS roles CASCADE;
 
 CREATE TABLE IF NOT EXISTS roles
 (
-    id   INT AUTO_INCREMENT,
+    id   SERIAL,
     name VARCHAR(255) NOT NULL,
     PRIMARY KEY (id)
 );
@@ -16,47 +16,47 @@ CREATE TABLE IF NOT EXISTS roles
 
 CREATE TABLE IF NOT EXISTS specializations
 (
-    id   INT AUTO_INCREMENT NOT NULL,
-    name VARCHAR(255)       NOT NULL,
+    id   SERIAL       NOT NULL,
+    name VARCHAR(255) NOT NULL,
     PRIMARY KEY (id)
 );
 
 CREATE TABLE IF NOT EXISTS users
 (
-    id                INT AUTO_INCREMENT NOT NULL,
-    name              VARCHAR(255)       NOT NULL,
-    email             VARCHAR(255)       NOT NULL unique,
-    password          VARCHAR(255)       NOT NULL,
-    role_id           INT                NOT NULL,
+    id                SERIAL       NOT NULL,
+    name              VARCHAR(255) NOT NULL,
+    email             VARCHAR(255) NOT NULL unique,
+    password          VARCHAR(255) NOT NULL,
+    role_id           INT          NOT NULL,
     specialization_id INT,
     PRIMARY KEY (id),
-    KEY role_id (role_id),
-    KEY specialization_id (specialization_id)
+    FOREIGN KEY (role_id) REFERENCES roles (id),
+    FOREIGN KEY (specialization_id) REFERENCES specializations (id)
 );
 
 
 CREATE TABLE IF NOT EXISTS statuses
 (
-    id   INT AUTO_INCREMENT NOT NULL,
-    name VARCHAR(255)       NOT NULL,
+    id   SERIAL       NOT NULL,
+    name VARCHAR(255) NOT NULL,
     PRIMARY KEY (id)
 );
 
 
 CREATE TABLE IF NOT EXISTS visits
 (
-    id        INT AUTO_INCREMENT NOT NULL,
-    user_id   INT                NOT NULL,
-    doctor_id INT                NOT NULL,
-    date      DATETIME           NOT NULL,
-    status_id INT                NOT NULL,
-    problem   TEXT               NOT NULL,
+    id        SERIAL NOT NULL,
+    user_id   INT    NOT NULL,
+    doctor_id INT    NOT NULL,
+    date      DATE   NOT NULL,
+    status_id INT    NOT NULL,
+    problem   TEXT   NOT NULL,
     diagnosis TEXT,
     treatment TEXT,
     PRIMARY KEY (id),
-    KEY user_id (user_id),
-    KEY doctor_id (doctor_id),
-    KEY status_id (status_id)
+    FOREIGN KEY (user_id) REFERENCES users (id),
+    FOREIGN KEY (doctor_id) REFERENCES users (id),
+    FOREIGN KEY (status_id) REFERENCES statuses (id)
 );
 
 

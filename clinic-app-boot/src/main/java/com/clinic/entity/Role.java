@@ -24,4 +24,5 @@ public class Role implements Serializable {
     @ToString.Exclude
     @EqualsAndHashCode.Exclude
     private Set<User> users;
+
 }
